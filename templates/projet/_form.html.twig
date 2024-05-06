@@ -1,0 +1,28 @@
+{{ form_start(form) }}
+     {{ form_errors(form) }}
+        <div class="form">
+            {{ form_start(form, { 'attr': {'class': 'mt-5'} }) }}
+            <div class="mb-3">
+            {{ form_label(form.nom,'Nom', { 'label_attr': {'class': 'form-label'} }) }}
+            {{ form_widget(form.nom, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+
+              <div class="mb-3">
+            {{ form_label(form.contenu,'Contenu', { 'label_attr': {'class': 'form-label'} }) }}
+            {{ form_widget(form.contenu, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+
+              <div class="mb-3">
+            {{ form_label(form.duree,'Durée', { 'label_attr': {'class': 'form-label'} }) }}
+            {{ form_widget(form.duree, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+
+              <div class="mb-3">
+            {{ form_label(form.pre_requis,'Pre-Réquis', { 'label_attr': {'class': 'form-label'} }) }}
+            {{ form_widget(form.pre_requis, { 'attr': {'class': 'form-control'} }) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+
+            {{ form_end(form) }}
+
+

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Projets{% endblock %}
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 15px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+ 
+    <h1>Liste de projets</h1>
+   <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Duree</th>
+                <th>Pre_requis</th>
+                <th>Contenu</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for projet in projets %}
+            {% if is_granted('ROLE_ENS')%}
+                <tr>
+                    <td>{{ projet.id }}</td>
+                    <td>{{ projet.nom }}</td>
+                    <td>{{ projet.duree }}</td>
+                    <td>{{ projet.preRequis }}</td>
+                    <td>{{ projet.contenu }}</td>
+                    
+                </tr>
+            {% elseif is_granted('ROLE_ET') %}
+                <tr>
+                    <td>{{ projet.id }}</td>
+                    <td>{{ projet.nom }}</td>
+                    <td>{{ projet.duree }}</td>
+                    <td>{{ projet.preRequis }}</td>
+                    <td>{{ projet.contenu }}</td>
+                    <td style="width: 300px;"> <!-- Adjust the width as needed -->
+                        <a href="{{ path('app_projet_select', {'id': projet.id}) }}" class="btn btn-primary">
+                            Sélectionner
+                        </a>
+                    </td>
+                </tr>
+            {% elseif is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td>{{ projet.id }}</td>
+                    <td>{{ projet.nom }}</td>
+                    <td>{{ projet.duree }}</td>
+                    <td>{{ projet.preRequis }}</td>
+                    <td>{{ projet.contenu }}</td>
+                    <td style="width: 300px;"> <!-- Adjust the width as needed -->
+                        <a href="{{ path('app_projet_show', {'id': projet.id}) }}" class="btn btn-primary">
+                            Afficher
+                        </a>
+                        <a href="{{ path('app_projet_edit', {'id': projet.id}) }}" class="btn btn-primary">
+                            Éditer
+                        </a>
+                        <a href="{{ path('app_projet_delete', {'id': projet.id}) }}" class="btn btn-danger">
+                            Supprimer
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('app_projet_new') }}">Create new</a>
+    {% endif %}
+{% endblock %}

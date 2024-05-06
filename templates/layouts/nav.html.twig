@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+  <div class="container">
+    <a class="navbar-brand" href="#">NetPFE</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+      
+        
+        {% if is_granted("ROLE_ADMIN") %}
+        <li class="nav-item">
+          <a class="nav-link" href={{ path("app_user")}}>Users</a>
+        </li>
+        
+        {% endif %}
+
+        <li class="nav-item">
+          <a class="nav-link" href={{ path("app_projet") }}>Projets</a>
+        </li>
+
+       
+      </ul>
+
+      {% if app.user %}
+        <a class="nav-link btn-outline-danger" href="{{ path("app_logout") }}">Logout</a>
+      {% else %}
+        <a class="nav-link btn-outline-primary" href="{{ path("app_login") }}">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

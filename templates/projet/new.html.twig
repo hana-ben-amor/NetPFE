@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Projet{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center p-5">
+        <div class="col-md-6">
+            <h1>Nouveau Projet</h1>
+
+    {{ include('projet/_form.html.twig') }}
+
+    <a href="{{ path('app_projet') }}">back to list</a>
+{% endblock %}
